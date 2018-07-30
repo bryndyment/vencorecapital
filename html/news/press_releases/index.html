@@ -1,0 +1,16 @@
+<&| /site/item_detail_page.mas, itemH => $itemH &>\
+<table class="w-100p" cellspacing="0">
+%	foreach $iH ( @$iAH ) {
+%		$iH->{ date_Mmm_dot_DD_comma_YYYY } =~ s/^May\./May/;
+	<tr><td class="pr-16 va-t w-100"><% $iH->{ date_Mmm_dot_DD_comma_YYYY } %></td><td class="pb-6"><a href="<% $iH->{ c_url } %>"><% $iH->{ c_name } %></a></td></tr>
+%	}
+</table>
+</&>\
+<%init>
+	my ( $iAH, $iH, $itemH );
+
+	$itemH->{ c_name } = 'Press Releases';
+	$itemH->{ c_menu_side } = Vencore::LOOKUP_MENU_SIDE_NEWS;
+
+	$iAH = Hoo::Item::GetMultiple( Vencore::ITEM_TYPE_PRESS_RELEASE, { order_by => 'c_date DESC' } );
+</%init>

@@ -1,0 +1,20 @@
+				</td>
+				<td id="shell-right" class="image">\
+%	foreach $i ( 5 .. 8 ) {
+<img height="437" src="/i/<% $page %>_bg_col_<% $i %>.gif" width="2">\
+%	}
+</td>
+			</tr></table>
+			<div class="image"><img height="<% $home ? '8' : '124' %>" src="/i/<% $page %>_bg_row_2.gif" width="970"></div>
+			<div id="foot">© 2018 Vencore Capital</div>
+		</div>
+	</body>
+</html>\
+<%args>
+	$home => undef
+</%args>
+<%init>
+	my ( $i, $page );
+
+	$page = $home ? 'home' : 'page';
+</%init>

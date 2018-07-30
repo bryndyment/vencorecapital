@@ -1,0 +1,27 @@
+%	if ( $menuAA ) {
+<table id="menu-side" cellspacing="0">
+%		foreach $menuA ( @$menuAA ) {
+%			$levelTwoURL = $menuA->[ 2 ] if ( $menuA->[ 1 ] == 2 );
+%			if ( ( $menuA->[ 1 ] < 3 ) || ( $ENV{ REQUEST_URI } =~ /^$levelTwoURL/ ) ) {
+	<tr><td class="level-<% $menuA->[ 1 ] %>"><div>\
+%				if ( $menuA->[ 1 ] > 1 ) {
+<a href="<% $menuA->[ 2 ] %>">\
+%				}
+<% $menuA->[ 0 ] %>\
+%				if ( ( $menuA->[ 1 ] > 1 ) && ( $ENV{ REQUEST_URI } eq $menuA->[ 2 ] ) ) {
+<img id="mark" height="6" src="/i/page_menu_side_mark.gif" width="6">\
+%				}
+%				if ( $menuA->[ 1 ] > 1 ) {
+</a>\
+%				}
+</div></td></tr>
+%			}
+%		}
+</table>\
+%	}
+<%args>
+	$menuAA => undef
+</%args>
+<%init>
+	my ( $levelTwoURL, $menuA );
+</%init>

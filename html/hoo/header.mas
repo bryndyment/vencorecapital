@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+%	if ( $designer ) {
+<!-- site design by <% $designer %> -->
+%	}
+<!-- site implementation by Hoo Logic -->
+<html>
+	<head>
+		<link href="/css/?2010102301" rel="stylesheet" type="text/css">
+%	if ( $sifr ) {
+		<link href="/css/sIFR-screen.css" media="screen" rel="stylesheet" type="text/css">
+		<link href="/css/sIFR-print.css" media="print" rel="stylesheet" type="text/css">
+%	}
+%	if ( $favicon ) {
+		<link rel="icon" href="/icon.png" type="image/png">
+%	}
+%	if ( $meta_description ) {
+		<meta content="<% $meta_description %>" http-equiv="description">
+%	}
+		<meta content="no" http-equiv="imagetoolbar">
+%	if ( $meta_keywords ) {
+		<meta content="<% $meta_keywords %>" http-equiv="keywords">
+%	}
+%	if ( $google_analytics ) {
+		<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+%	}
+%	if ( $jquery ) {
+		<script src="/js/jquery.js" type="text/javascript"></script>
+%	}
+		<script src="/js/?2010082401" type="text/javascript"></script>
+%	if ( $sifr ) {
+		<script src="/js/sifr.js" type="text/javascript"></script>
+		<script src="/js/sifr-config.js" type="text/javascript"></script>
+%	}
+%	if ( $default || $javascript || $jquery || $object || $onload || $onload_code ) {
+		<script type="text/javascript">
+%		if ( $javascript ) {
+<&| /hoo/format.mas, indent => 3 &><% $javascript %></&>
+%		}
+%		if ( $default || $object || $onload || $onload_code ) {
+			window.onload = function () {
+%			if ( $onload_code ) {
+<&| /hoo/format.mas, indent => 4 &><% $onload_code %></&>
+%			}
+%			if ( $default || $object || $onload ) {
+				__onl(<% $object ? ( ' ' . $object . ' ' ) : ( $default ? ( ' ' . $default . ' ' ) : '' ) %>);
+%			}
+				}
+%		}
+%		if ( $jquery ) {
+			$( <% $jquery_init %> );
+%		}
+		</script>
+%	}
+%	if ( $css ) {
+		<style type="text/css">
+<&| /hoo/format.mas, indent => 3 &><% $css %></&>
+		</style>
+%	}
+		<title><% ( $name || $m->apache_req->dir_config( 'HooName' ) ) . ( $title ? ( ' - ' . $title ) : '' ) %></title>
+	</head>
+	<body<% $page_id ? ( ' id="' . $page_id . '"' ) : '' %><% $page_class ? ( ' class="' . $page_class . '"' ) : '' %>>
+		<div id="all"<% $all_class ? ( ' class="' . $all_class . '"' ) : '' %>>\
+<%args>
+	$all_class => undef
+	$css => undef
+	$default => undef
+	$designer => undef
+	$favicon => undef
+	$google_analytics => 1
+	$javascript => undef
+	$jquery => undef
+	$jquery_init => '__init'
+	$meta_description => undef
+	$meta_keywords => undef
+	$name => undef
+	$object => undef
+	$onload => undef
+	$onload_code => undef
+	$page_class => undef
+	$page_id => undef
+	$sifr => undef
+	$title => undef
+</%args>

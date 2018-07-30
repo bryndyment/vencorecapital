@@ -1,0 +1,35 @@
+<&| /site/item_detail_page.mas, content_class => 'testimonials', itemH => $itemH &>\
+%	foreach $iH ( @$iAH ) {
+%		unless ( $count % 3 ) {
+%			if ( $count ) {
+</div>
+%			}
+<div id="testimonials-<% ++$page %>"<% ( $page == 1 ) ? '' : ' class="d-n"' %>>
+%		}
+	<p><em>"<% $iH->{ c_quote } %>"</em></p>
+	<div><% $iH->{ c_quote_source } %></div>
+%	$count++;
+%	}
+</div>
+<p>\
+%	foreach $i ( 1 .. $page ) {
+%		if ( $i > 1 ) {
+<span>|</span>\
+%		}
+%		unless ( ( $i - 1 ) % 8 ) {
+<br>
+%		}
+<a id="link-<% $i %>"<% ( $i == 1 ) ? ' class="td-n"' : '' %> href="<% ( $i == 1 ) ? '/clients/testimonials/' : '#' %>" onclick="__tes( <% $page %>, <% $i %> )">Page&nbsp;<% $i %></a>\
+%	}
+</p>\
+</&>\
+<%init>
+	my ( $count, $i, $iAH, $iH, $itemH, $lookupHH, $page );
+
+	$count = $page = 0;
+
+	$itemH->{ c_name } = 'Testimonials';
+	$itemH->{ c_menu_side } = Vencore::LOOKUP_MENU_SIDE_CLIENTS;
+
+	$iAH = Hoo::Item::AdminGetAllViaType( Vencore::ITEM_TYPE_TESTIMONIAL );
+</%init>

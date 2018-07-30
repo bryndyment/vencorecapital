@@ -1,0 +1,38 @@
+<& /hoo/header.mas, meta_description => Vencore::META_DESCRIPTION, meta_keywords => Vencore::META_KEYWORDS, onload => 1, page_id => 'home', title => Vencore::SLOGAN, %ARGS &>
+<& /site/middle.mas, home => 1, %ARGS &>
+					<h1>Vencore Capital — <% Vencore::SLOGAN %></h1>
+					<table id="main" cellspacing="0">
+						<tr>
+							<td id="top-left"<% ( $alt ) ? ' style="background-image: url( /i/temp2.jpg ) !important"' : '' %> colspan="2"><div class="inner">
+								<img height="75" src="/i/home_text_tl.gif" width="338">
+								<div id="extend-your-reach" class="image"><a href="/products/extend_your_reach/"><img alt="Extend Your Reach" height="33" src="/i/home_extend_your_reach.gif" width="292"></a></div>
+								<div id="learn-more" class="image"><a href="/products/extend_your_reach/"><img alt="Learn More" height="19" src="/i/learn_more.gif" width="78"></a></div>
+							</div></td>
+							<td class="bg-fff w-2"></td>
+							<td id="top-right"><div class="inner">
+<&| /hoo/format.mas, indent => 8 &><% $topRightH->{ c_content } %></&>
+							</div></td>
+						</tr>
+						<tr><td class="image" colspan="4"><img height="1" src="/i/home_bg_row_inner_1.gif" width="954"></td></tr>
+						<tr>
+							<td id="bottom-left"><div class="inner"><script src="/js/clients/" type="text/javascript"></script></div></td>
+							<td id="bottom-center"><div class="inner">
+<&| /hoo/format.mas, indent => 8 &><% $bottomCenterH->{ c_content } %></&>
+							</div></td>
+							<td class="bg-fff"></td>
+							<td id="bottom-right"><div class="inner">
+<&| /hoo/format.mas, indent => 8 &><% $bottomRightH->{ c_content } %></&>
+							</div></td>
+						</tr>
+					</table>
+<& /site/footer.mas, home => 1 &>\
+<%args>
+	$alt => undef
+</%args>
+<%init>
+	my ( $bottomCenterH, $bottomRightH, $topRightH );
+
+	$topRightH = Hoo::Item::Get( Vencore::CONTENT_HOME_TOP_RIGHT );
+	$bottomCenterH = Hoo::Item::Get( Vencore::CONTENT_HOME_BOTTOM_CENTER );
+	$bottomRightH = Hoo::Item::Get( Vencore::CONTENT_HOME_BOTTOM_RIGHT );
+</%init>

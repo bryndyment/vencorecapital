@@ -1,0 +1,11 @@
+<div id="tabs">\
+%	foreach $tabH ( @{ $sH->{ siteH }{ TABS } } ) {
+<div<% ( $tab eq $tabH->{ tab } ) ? ' id="front"' : '' %>><a href="<% $tabH->{ url } %>"><% $tabH->{ label } %></a></div>\
+%	}
+</div>
+<%args>
+	$tab => undef
+</%args>
+<%init>
+	my ( $tabH );
+</%init>

@@ -1,0 +1,38 @@
+<& /hoo/header.mas, meta_keywords => Vencore::META_KEYWORDS, onload => 1, page_id => 'page', title => $itemH->{ c_name }, %ARGS &>
+<& /site/middle.mas, %ARGS &>
+					<table id="main" cellspacing="0"><tr>
+						<td id="main-left">
+<&| /hoo/format.mas, indent => 7 &><& '/site/menu_side.mas', menuAA => $Vencore::MENU_SIDE->[ $itemH->{ c_menu_side } - 1 ] &></&>
+						</td>
+						<td id="main-right"><div class="p-r">
+							<h1><% $itemH->{ c_name } %></h1>
+							<div id="content"<% $content_class ? ( ' class="' . $content_class . '"' ) : '' %>>
+<&| /hoo/format.mas, indent => 8 &><% $m->content || $itemH->{ c_content } %></&>
+							</div>
+%	if ( $itemH->{ c_quote_id } ) {
+							<div id="main-quote">
+								<div class="image"><img height="6" src="/i/page_bg_quote_top.gif" width="182"></div>
+								<div class="inner">
+									<div id="quote"><span>“</span><% $quoteH->{ c_quote } %>”</div>
+%		if ( $quoteH->{ c_quote_source } ) {
+									<div id="quote-source"><% $quoteH->{ c_quote_source } %></div>
+%		}
+								</div>
+								<div class="image"><img height="6" src="/i/page_bg_quote_bot.gif" width="182"></div>
+							</div>
+%	}
+							<div class="c-b">&nbsp;</div>
+						</div></td>
+					</tr></table>
+<& /site/footer.mas &>\
+<%args>
+	$content_class => undef
+	$itemH
+</%args>
+<%init>
+	my ( $quoteH );
+
+	if ( $itemH->{ c_quote_id } ) {
+		$quoteH = Hoo::Item::Get( $itemH->{ c_quote_id } );
+		}
+</%init>

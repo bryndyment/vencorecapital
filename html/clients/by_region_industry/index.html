@@ -1,0 +1,46 @@
+<&| /site/item_detail_page.mas, content_class => 'clients', itemH => $itemH &>\
+<p>This page provides a partial list of Vencore clients sorted by region first, and then by industry within each region. Click on a specific region link to see the clients for that region. Click on the region link again to hide the clients for that region.</p>
+%	foreach $iH ( @$iAH ) {
+%		if ( $iH->{ c_region } != $region ) {
+%			if ( $region ) {
+	</div>
+%			}
+<h2><img id="img-<% $iH->{ c_region } %>" alt="Expand/Collapse" height="9" onclick="return __reg( <% $iH->{ c_region } %> )" src="/i/expand.gif" width="9"><a href="/clients/by_region_industry/" onclick="return __reg( <% $iH->{ c_region } %> )"><% $lookupHH->{ Vencore::LOOKUP_TYPE_REGION }{ $iH->{ c_region } }{ c_label } %></a></h2>
+<div id="reg-<% $iH->{ c_region } %>" class="region">
+%			$region = $iH->{ c_region };
+%			$industry = 0;
+%		}
+%		if ( $iH->{ c_industry } != $industry ) {
+	<h3><% $lookupHH->{ Vencore::LOOKUP_TYPE_INDUSTRY }{ $iH->{ c_industry } }{ c_label } %></h3>
+%			$industry = $iH->{ c_industry };
+%		}
+	<div>\
+%		if ( $iH->{ c_url_external } ) {
+<a href="http://<% $iH->{ c_url_external } %>">\
+%		}
+<% $iH->{ c_name } %>\
+%		if ( $iH->{ c_url_external } ) {
+</a>\
+%		}
+</div>
+%	}
+</div>\
+</&>\
+<%init>
+	my ( $iAH, $iH, $industry, $itemH, $lookupHH, $region, $sql );
+
+	$itemH->{ c_name } = 'Clients by Region/Industry';
+	$itemH->{ c_menu_side } = Vencore::LOOKUP_MENU_SIDE_CLIENTS;
+
+	$industry = $region = 0;
+
+	$lookupHH = Hoo::Lookup::GetAll();
+
+	$iAH = Hoo::Item::AdminGetAllViaType( Vencore::ITEM_TYPE_CLIENT, {
+		order_by => 'c_region, c_industry, c_name'
+		} );
+
+	$sql = 'SELECT * FROM t_item i INNER JOIN t_lookup l ON i.c_industry = l.c_value WHERE i.item_type_id = ' . Vencore::ITEM_TYPE_CLIENT . ' AND l.lookup_type_id = ' . Vencore::LOOKUP_TYPE_INDUSTRY . ' ORDER BY i.c_region, l.c_label, i.c_name';
+
+	$iAH = Hoo::DB::SelectAH( \$sql );
+</%init>

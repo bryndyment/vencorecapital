@@ -1,0 +1,37 @@
+<&| /site/item_detail_page.mas, content_class => 'clients', itemH => $itemH &>\
+<p>This page provides a partial list of Vencore clients sorted by industry. Click on a specific industry link to see the clients for that industry. Click on the industry link again to hide the clients for that industry.</p>
+%	foreach $iH ( @$iAH ) {
+%		if ( $iH->{ c_industry } != $industry ) {
+%			if ( $industry ) {
+</div>
+%			}
+<h2><img id="img-<% $iH->{ c_industry } %>" alt="Expand/Collapse" height="9" onclick="return __reg( <% $iH->{ c_industry } %> )" src="/i/expand.gif" width="9"><a href="/clients/by_industry/" onclick="return __reg( <% $iH->{ c_industry } %> )"><% $lookupHH->{ Vencore::LOOKUP_TYPE_INDUSTRY }{ $iH->{ c_industry } }{ c_label } %></a></h2>
+<div id="reg-<% $iH->{ c_industry } %>" class="region">
+%			$industry = $iH->{ c_industry };
+%		}
+	<div>\
+%		if ( $iH->{ c_url_external } ) {
+<a href="http://<% $iH->{ c_url_external } %>">\
+%		}
+<% $iH->{ c_name } %>\
+%		if ( $iH->{ c_url_external } ) {
+</a>\
+%		}
+</div>
+%	}
+</div>
+</&>\
+<%init>
+	my ( $iAH, $iH, $industry, $itemH, $lookupHH, $sql );
+
+	$itemH->{ c_name } = 'Clients by Industry';
+	$itemH->{ c_menu_side } = Vencore::LOOKUP_MENU_SIDE_CLIENTS;
+
+	$industry = 0;
+
+	$lookupHH = Hoo::Lookup::GetAll();
+	
+	$sql = 'SELECT * FROM t_item i INNER JOIN t_lookup l ON i.c_industry = l.c_value WHERE i.item_type_id = ' . Vencore::ITEM_TYPE_CLIENT . ' AND l.lookup_type_id = ' . Vencore::LOOKUP_TYPE_INDUSTRY . ' ORDER BY l.c_label, i.c_name';
+
+	$iAH = Hoo::DB::SelectAH( \$sql );
+</%init>
