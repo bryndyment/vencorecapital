@@ -1,9 +1,0 @@
-<h1><% $title %></h1>
-<p><% $message %></p>\
-<%args>
-	$message => 'Unknown message.'
-	$title => 'Message'
-</%args>
-<%init>
-	$m->clear_buffer;
-</%init>

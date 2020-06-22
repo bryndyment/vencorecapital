@@ -1,9 +1,0 @@
-<%init>
-	Hoo::SetMasonRequestObject( $m );
-	Hoo::DB::Connect();
-
-	Hoo::HandleURL( { %ARGS } );
-</%init>
-<%filter>
-	Hoo::DB::Disconnect();
-</%filter>

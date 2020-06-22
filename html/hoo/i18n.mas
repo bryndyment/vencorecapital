@@ -1,5 +1,0 @@
-<% $text %>\
-<%init>
-	local $_ = $m->content;
-	my ($text) = m{<$sH->{ siteH }{ lan }>(.*?)</$sH->{ siteH }{ lan }>}s;
-</%init>

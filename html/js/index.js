@@ -9,10 +9,8 @@ function __nav( _obj ) {
 	document.write( _str );
 	}
 function __onl() {
-%	unless ( Hoo::LOCAL || ( $ENV{ SERVER_NAME } =~ /^inviso/ ) || ( $ENV{ SERVER_NAME } =~ /^<% Vencore::HOST_LOCAL %>/ ) ) {
 	_uacct = '<% Vencore::GOOGLE_ANALYTICS %>';
 	urchinTracker();
-%	}
 	}
 function __reg( _id ) {
 	var _regE = document.getElementById( 'reg-' + _id );

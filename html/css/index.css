@@ -1,11 +1,11 @@
 body, form, h1, h2, h3, input, p, table { margin: 0; }
 th, td { padding: 0; }
 
-body { background: #bfb89e url( /i/bg.gif ) repeat-x; padding: 0 0 8px;<% $uaH->{ ie5w } ? ' text-align: center;' : '' %> }
+body { background: #bfb89e url( /i/bg.gif ) repeat-x; padding: 0 0 8px; }
 img { border: 0; }
 .anchor { color: #000 !important; }
 .image { font-size: 1pt; line-height: 0.01pt; }
-#all { font-family: arial,serif; font-size: 12px; margin: 33px auto; position: relative;<% $uaH->{ ie5w } ? ' text-align: left;' : '' %> width: 970px; }
+#all { font-family: arial,serif; font-size: 12px; margin: 33px auto; position: relative;width: 970px; }
 #head { position: relative; }
 #foot { color: #494323; font-family: arial,sans-serif; font-size: 11px; margin-left: 8px; }
 #shell-main { vertical-align: top; }
@@ -50,7 +50,7 @@ h1, h2 { font-family: georgia,serif; }
 #home #top-right .inner h2 { color: #3f2900; font-size: 14px; font-weight: normal; }
 
 #page h1 { color: #4f3d19; font-size: 32px; font-weight: normal; margin-bottom: 2px; }
-#page h2 { color: #4f3d19; font-size: 16px;<% ( $uaH->{ mac } || $uaH->{ safari } ) ? ' font-weight: normal;' : '' %>; margin: 24px 0 -6px; }
+#page h2 { color: #4f3d19; font-size: 16px; font-weight: normal; margin: 24px 0 -6px; }
 #page h3 { color: #4f3d19; }
 #page .clients h2 { font-size: 12px; left: 10px; margin: 6px 0 12px; }
 #page .clients h2 img { margin-right: 8px; }
@@ -65,7 +65,7 @@ h1, h2 { font-family: georgia,serif; }
 #page .testimonials span { color: #000; margin: 0 8px; }
 #page #clients { margin-left: 10px; position: relative; }
 #page #foot { margin-top: 2px; }
-#page #main { width: <% $uaH->{ safari } ? '954px' : '100%' %>; }
+#page #main { width: 100%; }
 #page #main-left { background: url( /i/page_bg_main_left.gif ) repeat-y; vertical-align: top; width: 204px; }
 #page #main-quote { float: right; position: relative; bottom: 17px; width: 182px; }
 #page #main-quote span { left: 15px; position: absolute; top: 20px; }
@@ -73,7 +73,7 @@ h1, h2 { font-family: georgia,serif; }
 #page #main-quote #quote { color: #744900; font-family: georgia,serif; font-size: 14px; font-style: italic; line-height: 1.8; width: 90%; }
 #page #main-quote #quote-source { margin-top: 16px; font-size: 11px; line-height: 1.4; }
 #page #main-right { background: #fff; padding: 31px 0 24px 38px; vertical-align: top; }
-#page #main-right #content { float: left; <% $uaH->{ ie56w } ? '' : 'min-' %>height: 239px; width: 500px; }
+#page #main-right #content { float: left; min-height: 239px; width: 500px; }
 #page #main-right #content a { color: #744900; }
 #page #main-right #content li { line-height: 1.8; margin-bottom: 8px; }
 #page #main-right #content p { line-height: 1.8; margin: 14px 0; }
@@ -107,9 +107,3 @@ h1, h2 { font-family: georgia,serif; }
 .w-100 { width: 100px; }
 .w-619 { width: 619px; }
 .w-100p { width: 100%; }
-
-<%init>
-	my ( $uaH );
-
-	$uaH = Hoo::UserAgent( $ENV{ HTTP_USER_AGENT } );
-</%init>
